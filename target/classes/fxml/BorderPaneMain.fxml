@@ -10,7 +10,4 @@
             <fx:include fx:id="toggleButtons" source="TopMenuButtons.fxml" />
       </VBox>
    </top>
-   <center>
-      <Label fx:id="label" text="Label" BorderPane.alignment="CENTER" />
-   </center>
 </BorderPane>
