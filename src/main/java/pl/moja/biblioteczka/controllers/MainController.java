@@ -1,15 +1,27 @@
 package pl.moja.biblioteczka.controllers;
 
+import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+import pl.moja.biblioteczka.dialogs.DialogUtils;
 
+import javax.swing.text.html.StyleSheet;
 import java.io.IOException;
+import java.util.Optional;
 
 public class MainController {
+    @FXML
+    CheckMenuItem alwaysOnTopCheck;
+
+
     @FXML
     private BorderPane mainBorderPane;
 
@@ -57,5 +69,31 @@ public class MainController {
             e.printStackTrace();
         }
         mainBorderPane.setCenter(parent);
+    }
+
+    public void closeApplication() {
+        Optional<ButtonType> buttonType = DialogUtils.confirmationDialg();
+        if(buttonType.get()==ButtonType.OK){
+        Platform.exit();
+        System.exit(0);}
+
+    }
+
+    public void setCaspian() {
+        Application.setUserAgentStylesheet("CASPIAN");
+    }
+
+    public void setModena() {
+        Application.setUserAgentStylesheet("MODENA");
+    }
+
+    public void setAlwaysOnTop(ActionEvent actionEvent) {
+        Stage stage = (Stage) mainBorderPane.getScene().getWindow();
+      boolean value =((CheckMenuItem)actionEvent.getSource()).isSelected();
+        stage.setAlwaysOnTop(value);
+    }
+
+    public void about() {
+        DialogUtils.dialogAboutApplication();
     }
 }
